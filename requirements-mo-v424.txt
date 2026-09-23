@@ -1,0 +1,7 @@
+anytree
+faker
+protobuf
+psycopg2-binary
+pyarrow
+pymysql
+tqdm
