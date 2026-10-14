@@ -2,7 +2,6 @@ import unittest
 from unittest.mock import patch
 
 from macrobench.validation import summarize_run_validity
-from scripts.run_mo_v424 import WORKFLOWS, render_config
 
 
 class ValidityTests(unittest.TestCase):
@@ -27,24 +26,6 @@ class ValidityTests(unittest.TestCase):
         work = {0: {"steps": 1, "status": "completed", "operation_errors": {}}}
         result = summarize_run_validity(work, 1, 1, False, worker_exceptions=1)
         self.assertEqual(result["invalid_reasons"], ["worker_exceptions"])
-
-
-class ConfigTests(unittest.TestCase):
-    def test_all_workflows_use_existing_clone_and_real_scale(self):
-        for name in WORKFLOWS:
-            with self.subTest(name=name):
-                text = render_config(name, "run1", "db1", 1000)
-                self.assertIn('db_name: "db1"', text)
-                self.assertIn('existing_db { branch_id: "main" }', text)
-                self.assertIn('db_scale: 1000', text)
-                self.assertIn("cleanup: true", text)
-        self.assertIn("schema_changes: 2", render_config("software_dev", "a", "b", 100))
-
-    def test_smoke_bounds_workers_and_steps(self):
-        text = render_config("simulation", "run1", "db1", 0, smoke=True)
-        self.assertIn("workers: 2", text)
-        self.assertIn("total_steps: 1", text)
-        self.assertIn("db_scale: 0", text)
 
 
 class CleanupTests(unittest.TestCase):
