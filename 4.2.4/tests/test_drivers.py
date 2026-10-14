@@ -1,8 +1,13 @@
+from pathlib import Path
+import sys
 import unittest
 from unittest.mock import patch
 
+HERE = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(HERE))
+
 from macrobench.validation import summarize_run_validity
-from scripts.run_mo_v424 import WORKFLOWS, render_config
+from run_branchbench import WORKFLOWS, render_config
 
 
 class ValidityTests(unittest.TestCase):

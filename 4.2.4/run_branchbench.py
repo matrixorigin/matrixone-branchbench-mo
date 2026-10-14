@@ -11,8 +11,8 @@ import sys
 from datetime import datetime, timezone
 
 
-ROOT = Path(__file__).resolve().parents[1]
-CONFIGS = Path(__file__).resolve().parent / "mo_v424_configs"
+ROOT = Path(__file__).resolve().parent
+CONFIGS = ROOT / "configs"
 WORKFLOWS = ("software_dev", "failure_repro", "data_cleaning", "mcts", "simulation")
 EXPECTED_ROWS = {
     "smoke": (10, 10),
@@ -28,7 +28,7 @@ def identifier(value):
 
 
 def render_config(workflow, run_id, database, scale, smoke=False):
-    template = (CONFIGS / f"{workflow}_noclone.textproto").read_text()
+    template = (CONFIGS / f"{workflow}.textproto").read_text()
     template = re.sub(r'(?m)^run_id: .*$', f'run_id: "{run_id}"', template)
     template = re.sub(r'(?m)^    db_name: .*$', f'    db_name: "{database}"', template)
     template = re.sub(r'(?m)^    db_scale: \d+', f'    db_scale: {scale}', template)
