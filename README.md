@@ -9,7 +9,7 @@ they are **not** used by the release entrypoint. Do not run the historical
 `macrobench.runner` directly when reproducing this release package.
 
 The canonical package is pinned to
-[`b0d6832ad1c39c06fef6ebdf5c62f173495273a1`](https://github.com/VioletQwQ-0/git4data-tutorial/tree/b0d6832ad1c39c06fef6ebdf5c62f173495273a1/benchmarks).
+[`b6d66f66320f6047e82e050809647b510f25e344`](https://github.com/VioletQwQ-0/git4data-tutorial/tree/b6d66f66320f6047e82e050809647b510f25e344/benchmarks).
 PR #1 is still pending, so preparation fetches that published fork commit,
 not a moving branch. Its runner is based on `dengn/matrixone-branchbench`
 commit `95c18b7bf7a51029e3344a65e807df07aa28a2ea` plus the canonical checked patch.

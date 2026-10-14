@@ -11,7 +11,7 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 # PR #1 is not merged yet; pin its published source rather than a moving branch.
 PACKAGE_URL = "https://github.com/VioletQwQ-0/git4data-tutorial.git"
-PACKAGE_COMMIT = "b0d6832ad1c39c06fef6ebdf5c62f173495273a1"
+PACKAGE_COMMIT = "b6d66f66320f6047e82e050809647b510f25e344"
 PACKAGE = ROOT / ".runtime" / "git4data-tutorial"
 
 
