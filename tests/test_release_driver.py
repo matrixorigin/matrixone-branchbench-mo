@@ -51,9 +51,12 @@ class ForwarderTests(unittest.TestCase):
     def test_forwards_exact_driver_interpreter_and_exit_code(self):
         paths = (Path("/package/benchmarks"), Path("/runner"), Path("/runner/.venv/bin/python"))
         with patch.object(run_mo, "prepared_runtime", return_value=paths), patch.object(
-                subprocess, "call", return_value=124) as call:
-            self.assertEqual(run_mo.main(["--scale", "smoke", "--check"]), 124)
-        self.assertEqual(call.call_args.args[0], [
+                run_mo.os, "execv", side_effect=SystemExit(124)) as execute:
+            with self.assertRaises(SystemExit) as result:
+                run_mo.main(["--scale", "smoke", "--check"])
+        self.assertEqual(result.exception.code, 124)
+        self.assertEqual(execute.call_args.args[0], "/runner/.venv/bin/python")
+        self.assertEqual(execute.call_args.args[1], [
             "/runner/.venv/bin/python", "/package/benchmarks/run_branchbench.py",
             "--backend", "MATRIXONE", "--repo", "/runner", "--scale", "smoke", "--check"])
 

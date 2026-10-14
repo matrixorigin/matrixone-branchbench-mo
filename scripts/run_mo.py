@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Forward to the pinned MatrixOne 4.2.5 driver; preparation is explicit."""
 
+import os
 import subprocess
 import sys
 
@@ -22,7 +23,7 @@ def main(argv=None):
         benchmarks, runner, python = prepared_runtime()
         command = [str(python), str(benchmarks / "run_branchbench.py"),
                    "--backend", "MATRIXONE", "--repo", str(runner), *argv]
-        return subprocess.call(command)
+        os.execv(str(python), command)
     except (RuntimeError, OSError, subprocess.SubprocessError) as error:
         print(f"FAIL: {error}", file=sys.stderr)
         return 1
