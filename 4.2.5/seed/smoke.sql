@@ -1,0 +1,1 @@
+../../common/seed/smoke.sql
